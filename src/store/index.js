@@ -1,15 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+import CharacterModule from "./CharacterModule.js"
 Vue.use(Vuex)
 
-export default new Vuex.Store({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
-  modules: {
-  }
-})
+
+const store = new Vuex.Store({
+    modules: {
+        CharacterModule: CharacterModule,
+
+    }
+});
+
+export default store;
