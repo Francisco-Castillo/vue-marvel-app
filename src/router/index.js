@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Character from '../views/Characters.vue'
+import Comics from '../views/Comics.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -14,6 +15,11 @@ const routes = [
     path: '/character',
     name: 'Character',
     component: Character
+  },
+  {
+    path: '/comics',
+    name: 'Comics',
+    component: Comics
   },
   {
     path: '/about',

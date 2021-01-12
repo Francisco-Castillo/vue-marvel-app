@@ -1,30 +1,44 @@
-<template >
-<div>
-  <b-container class="p-4" >
-  <b-row v-if="getItems">
-    <b-col v-for="item in getItems" v-bind:key="item.id" lg="3">
-      <b-img thumbnail fluid :src="item.thumbnail.path.concat('.jpg')" alt="Image 1"></b-img>
-      <h3 class="color-blanco p-2">{{item.name}}</h3>
-    </b-col>
-  </b-row>
-</b-container>
-</div>
+<template>
+  <div>
+    <b-container class="p-4">
+      <b-row v-if="getItems">
+        <b-col lg="12">
+          <div v-if="getItems.length > 0">
+            <carousel :margin="10" :items="4">
+                <b-img v-for="item in getItems" v-bind:key="item.id" thumbnail fluid :src="item.thumbnail.path.concat('.jpg')" alt="Image 1" :title="item.name" />
+            </carousel>
+          </div>
+
+        </b-col>
+      </b-row>
+    </b-container>
+  </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
-import { createHelpers } from "vuex-map-fields";
+import {
+  mapActions,
+  mapGetters
+} from "vuex";
+import {
+  createHelpers
+} from "vuex-map-fields";
+import carousel from 'vue-owl-carousel2'
 
-const { mapFields } = createHelpers({
+const {
+  mapFields
+} = createHelpers({
   getterType: "CharacterModule/getCharacterField",
   mutationType: "CharacterModule/updateCharacterField"
 });
 
-export default{
-  name:"ListadoCharacter",
-
+export default {
+  name: "ListadoCharacter",
+  components: {
+    carousel
+  },
   computed: {
-    ...mapGetters("CharacterModule",["getItems"]),
+    ...mapGetters("CharacterModule", ["getItems"]),
     ...mapFields({
       lista: "tabla",
     })
@@ -37,7 +51,7 @@ export default{
     },
 
   },
-  mounted () {
+  created() {
     this.clienteProviderLocal().then(s => {
       console.log(s);
     });
@@ -47,7 +61,7 @@ export default{
 </script>
 
 <style scoped>
-.color-blanco{
-  color:white !important;
+.color-blanco {
+  color: white !important;
 }
 </style>
